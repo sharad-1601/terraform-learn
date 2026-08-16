@@ -69,10 +69,17 @@ resource "aws_security_group" "terraform-sg" {
 
 
 resource "aws_instance" "sharad-terraform" {
-  count = 4   #meta argument(means it create the instances equesl to count).
+  # count = 4   #meta argument(means it create the instances equesl to count).
+
+for_each = tomap({
+  sharad-terra-devops-db = "t3.small"
+  sharad-terra-devops-app = "t3.micro"
+})    #another meta argument for_each used as map(key-pair) to give different name and sizes to the instnces
+
+
   key_name = aws_key_pair.mykey.key_name
   vpc_security_group_ids = [aws_security_group.terraform-sg.id]
-  instance_type = var.ec2_instance_type
+  instance_type = each.value
   # ami = "ami-04bc53b7a499f5d37"  #aws-linux
   ami = var.ec2_ami_id
   user_data = file("install_nginx.sh")
@@ -85,7 +92,7 @@ resource "aws_instance" "sharad-terraform" {
   }
 
   tags = {
-    "Name" = "sharad-terra-devops"
+    "Name" = each.key
   }
 
 }
