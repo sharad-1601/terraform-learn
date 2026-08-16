@@ -76,6 +76,8 @@ for_each = tomap({
   sharad-terra-devops-app = "t3.micro"
 })    #another meta argument for_each used as map(key-pair) to give different name and sizes to the instnces
 
+depends_on = [ aws_default_vpc.default, aws_key_pair.mykey ] #another meta argument which defines the plan creation means which create first then anyother ything
+
 
   key_name = aws_key_pair.mykey.key_name
   vpc_security_group_ids = [aws_security_group.terraform-sg.id]
