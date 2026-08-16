@@ -75,6 +75,7 @@ resource "aws_instance" "sharad-terraform" {
   instance_type = var.ec2_instance_type
   # ami = "ami-04bc53b7a499f5d37"  #aws-linux
   ami = var.ec2_ami_id
+  user_data = file("install_nginx.sh")
 
 
 
