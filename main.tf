@@ -97,6 +97,7 @@ depends_on = [ aws_default_vpc.default, aws_key_pair.mykey ] #another meta argum
   tags = {
     "Name" = each.key
     "Enviroment" = each.value
+    "Key-name" = aws_key_pair.mykey.key_name
   }
 
 }
