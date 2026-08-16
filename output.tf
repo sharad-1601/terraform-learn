@@ -18,3 +18,25 @@ output "aws_public_ip" {
   for instance in aws_instance.sharad-terraform : instance.public_ip
  ]
 }
+
+
+output "aws_public_dns" {
+ value = [
+  for instance in aws_instance.sharad-terraform : instance.public_dns
+ ]
+}
+
+
+
+output "aws_private_ip" {
+ value = [
+  for instance in aws_instance.sharad-terraform : instance.private_ip
+ ]
+}
+
+
+output "aws_instance_name" {
+ value = [
+  for instance in aws_instance.sharad-terraform : instance.tags["Name"]
+ ]
+}
