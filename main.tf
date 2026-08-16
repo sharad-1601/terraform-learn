@@ -69,7 +69,7 @@ resource "aws_security_group" "terraform-sg" {
 
 
 resource "aws_instance" "sharad-terraform" {
-  
+  count = 4   #meta argument(means it create the instances equesl to count).
   key_name = aws_key_pair.mykey.key_name
   vpc_security_group_ids = [aws_security_group.terraform-sg.id]
   instance_type = var.ec2_instance_type
